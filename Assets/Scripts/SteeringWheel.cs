@@ -11,20 +11,18 @@ public class SteeringWheel : XRBaseInteractable
 
     //Destination Angle
     private float toAngle = 0.0f;
-    
+
     //Angle For SmoothMovement
     private float normalizedAngle = 0.0f;
-    [SerializeField] private float minAngle, maxAngle; 
-   
+    [SerializeField] private float minAngle, maxAngle;
+
     [Min(1)]
     [SerializeField] private float rotationSpeed = 1;
 
     private GameObject rHand;
     private GameObject lHand;
 
-    [SerializeField] private Rigidbody vehicleRigidbody;
-    [SerializeField] private Transform vehicle;
-    [SerializeField] private float turnDamping = 200f;
+    // [SerializeField] private float turnDamping = 200f;
     private Vector3 positionAfterMovement;
 
     private Vector3 rHandLastPosition;
@@ -34,12 +32,14 @@ public class SteeringWheel : XRBaseInteractable
     private bool lHandOnSteering;
 
 
+    private float lastAngle = 0f;
+
 
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
         base.OnSelectEntered(args);
         XRBaseInteractor _interactor = args.interactor;
-        Debug.Log(_interactor.gameObject.name);
+        //Debug.Log(_interactor.gameObject.name);
 
         if (_interactor.gameObject.name == "RightHand")
         {
@@ -55,28 +55,33 @@ public class SteeringWheel : XRBaseInteractable
             lHandLastPosition = new Vector3(lHandLastPosition.x, lHandLastPosition.y, 0);
             lHandOnSteering = true;
         }
-        
-    }
 
+    }
 
     protected override void OnSelectExited(SelectExitEventArgs args)
     {
         base.OnSelectExited(args);
         XRBaseInteractor _interactor = args.interactor;
 
-        Debug.Log(_interactor.gameObject.name);
+        // Debug.Log(_interactor.gameObject.name);
 
         if (_interactor.gameObject.name == "RightHand")
         {
             rHand = null;
             rHandOnSteering = false;
+
         }
         else
         {
             lHand = null;
             lHandOnSteering = false;
         }
+
+        lastAngle = toAngle;
+        Debug.Log("Last Angle : " + lastAngle);
     }
+
+
 
     public override void ProcessInteractable(XRInteractionUpdateOrder.UpdatePhase updatePhase)
     {
@@ -89,24 +94,39 @@ public class SteeringWheel : XRBaseInteractable
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (!rHandOnSteering && !lHandOnSteering && lastAngle != 0f)
+        {
+            Debug.Log(" Return To Normal Angle " + lastAngle);
+            lastAngle = Mathf.Lerp(lastAngle, 0f, Time.deltaTime * rotationSpeed / 2);
+            steeringTransform.localEulerAngles = new Vector3(0, 0, lastAngle);
+            toAngle = normalizedAngle = lastAngle;
+
+            if (lastAngle < 1f && lastAngle > -1f)
+                lastAngle = 0f;
+        }
+    }
+
+    public float GetSteeringAngle() => toAngle = Mathf.Clamp(toAngle, minAngle, maxAngle);
     private void RotateSteering()
     {
         // Convert that direction to an angle, then rotation
         float changedRotationAngle = FindSteeringAngleDifference();
         ApplyRotationOnSteering(changedRotationAngle);
-        TurnVehicle();
-        
-        
+        //TurnVehicle();
+
+
     }
 
-    private void TurnVehicle()
-    {
-        var turn = -toAngle;
+    /* private void TurnVehicle()
+     {
+         var turn = -toAngle;
 
-        turn /= 10f;
+         turn /= 10f;
 
-        vehicleRigidbody.MoveRotation(Quaternion.RotateTowards(vehicle.rotation, Quaternion.Euler(0, turn, 0), Time.deltaTime * turnDamping));
-    }
+         vehicleRigidbody.MoveRotation(Quaternion.RotateTowards(vehicle.rotation, Quaternion.Euler(0, turn, 0), Time.deltaTime * turnDamping));
+     }*/
 
     private void ApplyRotationOnSteering(float changedRotationAngle)
     {
@@ -116,14 +136,14 @@ public class SteeringWheel : XRBaseInteractable
 
         normalizedAngle = Mathf.Lerp(normalizedAngle, toAngle, Time.deltaTime * rotationSpeed);
         steeringTransform.localEulerAngles = new Vector3(0, 0, normalizedAngle);
-        Debug.Log("Rotation : " + toAngle);
+        //Debug.Log("Rotation : " + toAngle);
     }
 
     private float FindSteeringAngleDifference()
     {
         float angleChange = 0f;
 
-        if(rHandOnSteering && rHand && !lHandOnSteering)
+        if (rHandOnSteering && rHand && !lHandOnSteering)
         {
             positionAfterMovement = FindLocalPoint(rHand.transform.position);
             angleChange = GetAngleBLines(positionAfterMovement, rHandLastPosition);
@@ -137,7 +157,7 @@ public class SteeringWheel : XRBaseInteractable
             lHandLastPosition = positionAfterMovement;
         }
 
-        if( rHandOnSteering && lHandOnSteering && rHand && lHand)
+        if (rHandOnSteering && lHandOnSteering && rHand && lHand)
         {
             positionAfterMovement = FindLocalPoint(rHand.transform.position);
             angleChange = GetAngleBLines(positionAfterMovement, rHandLastPosition);
