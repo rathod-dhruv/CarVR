@@ -362,97 +362,13 @@ PrefabInstance:
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 1242062370}
-    - target: {fileID: 1129859642, guid: d15913fe2b4a05f4a972bbfda701c20d, type: 3}
-      propertyPath: m_WheelDampingRate
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1129859642, guid: d15913fe2b4a05f4a972bbfda701c20d, type: 3}
-      propertyPath: m_ForceAppPointDistance
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1129859642, guid: d15913fe2b4a05f4a972bbfda701c20d, type: 3}
-      propertyPath: m_ForwardFriction.m_Stiffness
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1129859642, guid: d15913fe2b4a05f4a972bbfda701c20d, type: 3}
-      propertyPath: m_SidewaysFriction.m_Stiffness
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1249887775344858997, guid: d15913fe2b4a05f4a972bbfda701c20d, type: 3}
-      propertyPath: m_WheelDampingRate
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1249887775344858997, guid: d15913fe2b4a05f4a972bbfda701c20d, type: 3}
-      propertyPath: m_ForceAppPointDistance
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1249887775344858997, guid: d15913fe2b4a05f4a972bbfda701c20d, type: 3}
-      propertyPath: m_ForwardFriction.m_Stiffness
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1249887775344858997, guid: d15913fe2b4a05f4a972bbfda701c20d, type: 3}
-      propertyPath: m_SidewaysFriction.m_Stiffness
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3383485004556956823, guid: d15913fe2b4a05f4a972bbfda701c20d, type: 3}
-      propertyPath: m_WheelDampingRate
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3383485004556956823, guid: d15913fe2b4a05f4a972bbfda701c20d, type: 3}
-      propertyPath: m_ForceAppPointDistance
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3383485004556956823, guid: d15913fe2b4a05f4a972bbfda701c20d, type: 3}
-      propertyPath: m_ForwardFriction.m_Stiffness
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3383485004556956823, guid: d15913fe2b4a05f4a972bbfda701c20d, type: 3}
-      propertyPath: m_SidewaysFriction.m_Stiffness
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3392155069799252563, guid: d15913fe2b4a05f4a972bbfda701c20d, type: 3}
-      propertyPath: m_WheelDampingRate
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3392155069799252563, guid: d15913fe2b4a05f4a972bbfda701c20d, type: 3}
-      propertyPath: m_ForceAppPointDistance
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3392155069799252563, guid: d15913fe2b4a05f4a972bbfda701c20d, type: 3}
-      propertyPath: m_ForwardFriction.m_Stiffness
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3392155069799252563, guid: d15913fe2b4a05f4a972bbfda701c20d, type: 3}
-      propertyPath: m_SidewaysFriction.m_Stiffness
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8520206866905380015, guid: d15913fe2b4a05f4a972bbfda701c20d, type: 3}
       propertyPath: m_Name
       value: Volvo S90 (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 8862154777709261195, guid: d15913fe2b4a05f4a972bbfda701c20d, type: 3}
-      propertyPath: acceleration
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 8862154777709261195, guid: d15913fe2b4a05f4a972bbfda701c20d, type: 3}
-      propertyPath: breakingForce
-      value: 800
-      objectReference: {fileID: 0}
     - target: {fileID: 9040426137369275925, guid: d15913fe2b4a05f4a972bbfda701c20d, type: 3}
       propertyPath: m_RootOrder
       value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 9040426137369275925, guid: d15913fe2b4a05f4a972bbfda701c20d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9040426137369275925, guid: d15913fe2b4a05f4a972bbfda701c20d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9040426137369275925, guid: d15913fe2b4a05f4a972bbfda701c20d, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9040426137369275925, guid: d15913fe2b4a05f4a972bbfda701c20d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -464,7 +380,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9040426137369275925, guid: d15913fe2b4a05f4a972bbfda701c20d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.592
+      value: -194.9
       objectReference: {fileID: 0}
     - target: {fileID: 9040426137369275925, guid: d15913fe2b4a05f4a972bbfda701c20d, type: 3}
       propertyPath: m_LocalRotation.w
