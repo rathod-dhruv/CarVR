@@ -9,6 +9,8 @@ public class GearLever : MonoBehaviour
     [SerializeField] InputActionReference rightHapticAction;*/
     HingeJoint hinge;
     [SerializeField] WheelController wheelController;
+    [SerializeField] SkinnedMeshRenderer rightHand;
+    [SerializeField] SkinnedMeshRenderer controllerHand;
 
     // Start is called before the first frame update
     void Start()
@@ -60,5 +62,14 @@ public class GearLever : MonoBehaviour
         {
             transform.localRotation = Quaternion.Euler(0f, transform.localEulerAngles.y, transform.localEulerAngles.z);
         }
+
+        controllerHand.enabled = true;
+        rightHand.enabled = false;
+    }
+
+    public void OnSelectEnter()
+    {
+        controllerHand.enabled = false;
+        rightHand.enabled = true;
     }
 }

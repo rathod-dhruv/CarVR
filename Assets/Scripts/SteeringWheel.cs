@@ -7,7 +7,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class SteeringWheel : XRBaseInteractable
 {
     [SerializeField] private Transform steeringTransform;
-
+    
 
     //Destination Angle
     private float toAngle = 0.0f;
@@ -34,6 +34,9 @@ public class SteeringWheel : XRBaseInteractable
 
     private float lastAngle = 0f;
 
+    [SerializeField] private SkinnedMeshRenderer lHandDummy;
+    [SerializeField] private SkinnedMeshRenderer rHandDummy;
+
 
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
@@ -44,6 +47,8 @@ public class SteeringWheel : XRBaseInteractable
         if (_interactor.gameObject.name == "RightHand")
         {
             rHand = _interactor.gameObject;
+            rHand.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
+            rHandDummy.enabled = true;
             rHandLastPosition = transform.InverseTransformPoint(rHand.transform.position);
             rHandLastPosition = new Vector3(rHandLastPosition.x, rHandLastPosition.y, 0);
             rHandOnSteering = true;
@@ -51,6 +56,8 @@ public class SteeringWheel : XRBaseInteractable
         else
         {
             lHand = _interactor.gameObject;
+            lHand.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
+            lHandDummy.enabled = true;
             lHandLastPosition = transform.InverseTransformPoint(lHand.transform.position);
             lHandLastPosition = new Vector3(lHandLastPosition.x, lHandLastPosition.y, 0);
             lHandOnSteering = true;
@@ -63,16 +70,21 @@ public class SteeringWheel : XRBaseInteractable
         base.OnSelectExited(args);
         XRBaseInteractor _interactor = args.interactor;
 
-        // Debug.Log(_interactor.gameObject.name);
+        Debug.Log("HANDEXIT" +_interactor.gameObject.name);
 
         if (_interactor.gameObject.name == "RightHand")
         {
-            rHand = null;
             rHandOnSteering = false;
+            rHand.GetComponentInChildren<SkinnedMeshRenderer>(true).enabled = true;
+            rHand = null;
+            rHandDummy.enabled = false;
+            Debug.Log("RHand HANDEXIT");
 
         }
         else
         {
+            lHand.GetComponentInChildren<SkinnedMeshRenderer>(true).enabled = true;
+            lHandDummy.enabled = false;
             lHand = null;
             lHandOnSteering = false;
         }

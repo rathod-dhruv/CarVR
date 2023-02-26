@@ -26,12 +26,12 @@ public class HandController : MonoBehaviour
 
     private void TriggerPressed(InputAction.CallbackContext obj)
     {
-        handAnimator.SetFloat("Trigger", obj.ReadValue<float>());
+        handAnimator.SetFloat("Trigger", obj.ReadValue<float>() + 0.05f);
     }
 
     private void GripPressed(InputAction.CallbackContext obj)
     {
-        handAnimator.SetFloat("Grip", obj.ReadValue<float>());
+        handAnimator.SetFloat("Grip", obj.ReadValue<float>() + 0.05f);
     }
 
     private void OnDisable()
