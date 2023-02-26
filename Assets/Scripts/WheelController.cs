@@ -5,7 +5,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.XR.OpenXR.Input;
 
 public class WheelController : MonoBehaviour
 {
@@ -38,9 +37,10 @@ public class WheelController : MonoBehaviour
 
 
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource audioSourceBreak;
     [SerializeField] private Rigidbody carRigidBody;
     [SerializeField] private XRGrabInteractable grabInteractable;
-/*    [SerializeField] UnityEngine.InputSystem.InputActionReference rightHapticAction;
+/*  [SerializeField] UnityEngine.InputSystem.InputActionReference rightHapticAction;
     [SerializeField] UnityEngine.InputSystem.InputActionReference leftHapticAction;*/
 
     public float dir;
@@ -107,11 +107,13 @@ public class WheelController : MonoBehaviour
         {
             currentBreakforce = breakingForce * breakingForce;
             breakDown = true;
+            audioSourceBreak.volume = 0.3f;
         }
         else
         {
             currentBreakforce = 0f;
             breakDown = false;
+            audioSourceBreak.volume = 0f;
         }
 
         if (breakDown)
@@ -135,7 +137,7 @@ public class WheelController : MonoBehaviour
         if (btnValue > 0.5f)
         {
             currentAcceleration = acceleration * speed * dir;
-            audioSource.volume = speed;
+            audioSource.volume =  speed;
             //OpenXRInput.SendHapticImpulse(rightHapticAction, 0.3f, 0.1f, UnityEngine.InputSystem.XR.XRController.rightHand); //Right Hand Haptic Impulse
         }
         else
@@ -144,12 +146,13 @@ public class WheelController : MonoBehaviour
             {
                 AutoBreak(true);
                 currentAcceleration = 0f;
-                audioSource.volume = 0.1f;
+                audioSource.volume = 0.02f;
             }
             else if (carRigidBody.velocity.magnitude <= 0.5f)
             {
                 Debug.LogWarning("Disable");
                 AutoBreak(false);
+                audioSource.volume = 0.02f;
             }
         }
 
